@@ -1,0 +1,43 @@
+name: build-sphinx-docs
+
+env:
+  GITHUB_ACTOR: ${{ github.actor }}
+  GITHUB_EMAIL: webmaster@mini-iac.org
+  GITHUB_REPOSITORY: ${{ github.repository }}
+  GITHUB_DEPLOY_KEY: ${{ secrets.REPO_DEPLOY_KEY }}
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs:
+  build_sphinx_job:
+    runs-on: [self-hosted, weu, Linux]
+    name: Build the docs packages on docker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: sphinx-builder:latest
+
+      - name: Create env file
+        run: |
+          echo "GITHUB_ACTOR"           >  ${{ github.workspace }}/env.list
+          echo "GITHUB_EMAIL"           >> ${{ github.workspace }}/env.list
+          echo "GITHUB_DEPLOY_KEY"      >> ${{ github.workspace }}/env.list
+          echo "GITHUB_REPOSITORY"      >> ${{ github.workspace }}/env.list
+        shell: bash
+
+      - name: Build doc files
+        run: docker run --rm --env-file ${{ github.workspace }}/env.list -v ${{ github.workspace }}/docs:/docs -v ${{ github.workspace }}/bin:/scripts sphinx-builder:latest /scripts/build-local.sh -b clean -b html -b latexpdf -D
+        shell: bash
+
+      - name: Push the results to docs branch
+        run: docker run --rm --env-file ${{ github.workspace }}/env.list -v ${{ github.workspace }}/docs:/docs -v ${{ github.workspace }}/bin:/scripts sphinx-builder:latest /scripts/commit-docs.sh
+        shell: bash

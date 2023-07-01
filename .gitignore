@@ -1,0 +1,9 @@
+# VSCode Sphinx Ignore
+
+# For now lets just store the sources.
+/docs/build
+/docs/*/build
+
+# Put local python envs here.   Only relevant when using local python.
+/.env*
+/.local
