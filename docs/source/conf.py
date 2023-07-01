@@ -34,4 +34,5 @@ html_show_sphinx = False
 epub_tocdepth = 3
 epub_writing_mode = 'horizontal'
 
-latex_theme = 'howto'
+#latex_theme = 'howto'
+latex_documents = [('index', 'doc.tex', project, author, 'howto')]
