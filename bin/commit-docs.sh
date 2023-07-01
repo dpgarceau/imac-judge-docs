@@ -111,9 +111,9 @@ git commit -am "${msg}"
  
 # overwrite the contents of the gh-pages branch on our github.com repo
 if $DryRun; then
-    echo "$INFO Not Executing (DryRun): git push deploy docs --force"
+    echo "$INFO Not Executing (DryRun): git push deploy gh-pages --force"
 else
-    git push deploy docs --force
+    git push deploy gh-pages --force
     RC=$?
 fi
 
