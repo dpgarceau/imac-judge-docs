@@ -7,3 +7,4 @@
 # Put local python envs here.   Only relevant when using local python.
 /.env*
 /.local
+/.vscode

@@ -51,6 +51,12 @@ function executeCopyCmd() {
     find "${DOCROOT}/build/latex/" -name \*.pdf -ls -exec cp {} "${DEST}/${DIRNAME}/" \;
 }
 
+function processDir() {
+    DOCROOT=$1
+
+    echo -e "$INFO: Processing $THEDIR"
+    [ $(basename "$DOCROOT") == "_Template" ] || executeCopyCmd "$DOCROOT" "$tmpdocroot"
+}
 #######################
 # Update GitHub Pages #
 #######################
@@ -64,10 +70,15 @@ tmpdocroot=`mktemp -d`
 
 # Find the docs that were created and copy them.
 DOCSDIR="/docs"
-for M in */Makefile; do
-    DOCROOT=$(dirname "$DOCSDIR/$M")
-    [ "$DOCROOT" == "$DOCSDIR/_Template" ] || executeCopyCmd "$DOCROOT" "$tmpdocroot"
-done
+
+if [ -f ./Makefile ]; then
+    processDir "$DOCSDIR";
+else
+    for M in */Makefile; do
+        DOCROOT=$(dirname "$DOCSDIR/$M")
+        processDir "$DOCROOT";
+    done
+fi
 
 echo "${GITHUB_DEPLOY_KEY}" > ~/id_temp
 chmod 600 ~/id_temp
@@ -77,7 +88,8 @@ pushd "${tmpdocroot}"
 git init
 git remote add deploy "git@github.com:/${GITHUB_REPOSITORY}.git"
 git config core.sshCommand "ssh -o StrictHostKeyChecking=no -i ~/id_temp"
-git checkout -b docs
+git checkout -b gh-pages
+
  
 # Adds .nojekyll file to the root to signal to GitHub that  
 # directories that start with an underscore (_) can remain

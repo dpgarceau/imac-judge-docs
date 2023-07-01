@@ -70,6 +70,14 @@ function executeBuildCmd() {
     return $RC
 }
 
+function processDir() {
+    THEDIR=$1
+
+    echo -e "$INFO: Processing $THEDIR"
+    for val in "${BuildCommands[@]}"; do
+        [ $(basename "$THEDIR") == "_Template" ] || executeBuildCmd "$THEDIR" "$val"
+    done
+}
 ###########  Main Code
 
 # Make sure we have the SCRIPTDIR variable set.
@@ -101,10 +109,13 @@ fi
 # Find the Makefiles so we know which docs to build...
 CWDSAVE=$(pwd)
 cd "$DOCSDIR"
-for M in */Makefile; do
-    DOCROOT=$(dirname "$DOCSDIR/$M")
-    for val in "${BuildCommands[@]}"; do
-        [ "$DOCROOT" == "$DOCSDIR/_Template" ] || executeBuildCmd "$DOCROOT" "$val"
+
+if [ -f ./Makefile ]; then
+    processDir "$DOCSDIR";
+else
+    for M in */Makefile; do
+        DOCROOT=$(dirname "$DOCSDIR/$M")
+        processDir "$DOCROOT";
     done
-done
+fi
 cd "$CWDSAVE"
