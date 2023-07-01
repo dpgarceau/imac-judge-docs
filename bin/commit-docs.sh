@@ -99,10 +99,12 @@ git checkout -b gh-pages
 # directories that start with an underscore (_) can remain
 touch .nojekyll
  
+GITHUB_PAGE_URL=$( echo ${GITHUB_REPOSITORY} | sed -e 's|\(.*\)/\(.*\)|https://\1.github.io/\2/|')
+
 # Add README
 cat > README.md <<EOF
 # README for Sphinx Docs
-This branch is simply a cache for the website served from https://${GITHUB_PAGES_HOST}/${GITHUB_REPOSITORY}/,
+This branch is simply a cache for the website served from ${GITHUB_PAGE_URL}, 
 and is not intended to be viewed on github.com.
 EOF
  
