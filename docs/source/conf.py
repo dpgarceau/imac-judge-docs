@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'DOP - F5 - Firmware Upgrade'
-copyright = '2023, Airfrance-KLM'
-author = 'ITOP SA'
+project = 'IMAC Judge App Documentation'
+copyright = '2023, IMAC, https://mini-iac.org'
+author = 'IMAC-Org'
 release = '0.5'
 today_fmt = '%Y-%m-%d'
 

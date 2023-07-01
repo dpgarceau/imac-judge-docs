@@ -37,6 +37,8 @@ apt-get -y install git rsync
 function executeCopyCmd() {
     DOCROOT=$1
     DEST=$2
+    ISROOT=$3
+
     if [ ! -d "$DOCROOT" ]; then
         echo -e "$ERROR Could not find soures to build at ${DOCROOT}"
         return -1
@@ -44,19 +46,19 @@ function executeCopyCmd() {
 
     DIRNAME=$(basename "$DOCROOT")
 
+    if [ "$ISROOT" == "true" ]; then
+        DESTINATION="${DEST}"
+    else
+        DESTINATION="${DEST}/${DIRNAME}"
+    fi
+
     echo -e "$INFO Copying HTML files."
-    rsync -a "${DOCROOT}/build/html/" "${DEST}/${DIRNAME}"
+    rsync -a "${DOCROOT}/build/html/" "${DESTINATION}"
 
     echo -e "$INFO Copying PDF file."
-    find "${DOCROOT}/build/latex/" -name \*.pdf -ls -exec cp {} "${DEST}/${DIRNAME}/" \;
+    find "${DOCROOT}/build/latex/" -name \*.pdf -ls -exec cp {} "${DESTINATION}/" \;
 }
 
-function processDir() {
-    DOCROOT=$1
-
-    echo -e "$INFO: Processing $THEDIR"
-    [ $(basename "$DOCROOT") == "_Template" ] || executeCopyCmd "$DOCROOT" "$tmpdocroot"
-}
 #######################
 # Update GitHub Pages #
 #######################
@@ -72,11 +74,13 @@ tmpdocroot=`mktemp -d`
 DOCSDIR="/docs"
 
 if [ -f ./Makefile ]; then
-    processDir "$DOCSDIR";
+    echo -e "$INFO: Processing single doc root $DOCSDIR"
+    executeCopyCmd "$DOCSDIR" "$tmpdocroot" "true"
 else
     for M in */Makefile; do
         DOCROOT=$(dirname "$DOCSDIR/$M")
-        processDir "$DOCROOT";
+        echo -e "$INFO: Processing doc root $DOCROOT"
+        executeCopyCmd "$DOCROOT" "$tmpdocroot"
     done
 fi
 
