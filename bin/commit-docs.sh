@@ -102,7 +102,7 @@ touch .nojekyll
 # Add README
 cat > README.md <<EOF
 # README for Sphinx Docs
-This branch is simply a cache for the website served from https://github.com/${GITHUB_REPOSITORY}/,
+This branch is simply a cache for the website served from https://${GITHUB_PAGES_HOST}/${GITHUB_REPOSITORY}/,
 and is not intended to be viewed on github.com.
 EOF
  

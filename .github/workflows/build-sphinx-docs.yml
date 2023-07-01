@@ -3,6 +3,7 @@ name: build-sphinx-docs
 env:
   GITHUB_ACTOR: ${{ github.actor }}
   GITHUB_EMAIL: webmaster@mini-iac.org
+  GITHUB_PAGES_HOST: imac-org.github.io
   GITHUB_REPOSITORY: ${{ github.repository }}
   GITHUB_DEPLOY_KEY: ${{ secrets.REPO_DEPLOY_KEY }}
 
@@ -32,6 +33,7 @@ jobs:
           echo "GITHUB_EMAIL"           >> ${{ github.workspace }}/env.list
           echo "GITHUB_DEPLOY_KEY"      >> ${{ github.workspace }}/env.list
           echo "GITHUB_REPOSITORY"      >> ${{ github.workspace }}/env.list
+          echo "GITHUB_PAGES_HOST"      >> ${{ github.workspace }}/env.list
         shell: bash
 
       - name: Build doc files
