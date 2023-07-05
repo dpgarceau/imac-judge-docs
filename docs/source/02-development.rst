@@ -68,7 +68,11 @@ In both of these scenarios we are still relying on the judge to 'pick the right 
 In the second scenario, it's easy as well to select the wrong type (known or unknown) and so the same danger applies.
 
 One way to get around this is for the devices to communicate with each other.  I've thought about how to solve this with ScorePad in the past and have come up with the following idea:
+
 * Judge selects the round and clicks OK.
-* Device advertises on the local network "I am judge X of Flight Line Y.   I am scoring Sportsman Known Round 1".
-* Device does not start scoring until it hears from every other judge device.    It only needs to know how many devices there should be and that can be provided by Score.
+* Device advertises on the local network.::
+
+    I am judge X of Flight Line Y.   I am scoring Sportsman Known Round 1.
+
+* Device does not start scoring until it hears from every other judge device.  It only needs to know how many devices there should be and that can be provided by Score.
 
