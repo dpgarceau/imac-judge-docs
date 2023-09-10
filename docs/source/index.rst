@@ -26,3 +26,7 @@ These pages contain the documenation of the IMAC Judge App.   Depending on how y
 
    01-overview
    02-development
+   03-ScoreSetup
+   04-AeroJudgeDeviceSetup
+   05-AeroJudgeUserGuide
+   06-AeroJudgeAdvanced
