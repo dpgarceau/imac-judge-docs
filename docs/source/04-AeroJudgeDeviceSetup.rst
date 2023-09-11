@@ -96,15 +96,14 @@ Configuring device for a contest
 3. Edit the file placing the appropriate values after the colon (:) being careful to preserve all formatting (braces, quotes, commas).
 
    .. code-block:: javascript
-      :caption: settings.json
 
-    {
+      {
         "judge_id":1,
         "line_number":1,
         "score_host":"192.168.50.100",
         "score_http_port":80,
         "language":"en"
-    }
+      }
 
  *settings.json file parameters:*
 
