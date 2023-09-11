@@ -17,7 +17,7 @@ First download an SSH client `Putty <https://www.chiark.greenend.org.uk/~sgtatha
 
    |LoginImg3|
 
-#. A command prompt will appear after entering the passord: |LoginImg3|
+#. A command prompt will appear after entering the password: |LoginImg3|
 
    .. note:: This is a Linux console and is very case sensitive (unlike Windows). Most all commands and parameters will be lowercase (unless otherwise noted). See [1]_
 

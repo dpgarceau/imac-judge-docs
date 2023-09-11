@@ -1,8 +1,8 @@
 AeroJudge Device Setup
 ======================
 
-New device
-----------
+Setup New device
+----------------
 
 If you have a new device or a new SD card, then you need to download the full device image:
 
@@ -24,20 +24,22 @@ If you have an existing device that needs to be updated:
 
 * If the device is connected to WiFi network with internet available:
 
-   #. Login to the device using putty entering the appropriate IP address |LoginImg1|
+  1. Login to the device using putty entering the appropriate IP address |LoginImg1|
 
-   #. Answer Yes if you receive a security alert (only the first time) |LoginImg2|
+  2. Answer Yes if you receive a security alert (only the first time) |LoginImg2|
 
-   #. At login as prompt enter "judge" and press enter.
+  3. At login as prompt enter "judge" and press enter.
 
-   #. At the password prompt enter the approprate password. Contact the IMAC AeroJudge development team for the current password.
-        .. note:: When typing the password no characters will be displayed on the screen. If a mistake is made, press Enter and it will prompt again to enter the correct password.
+  4. At the password prompt enter the approprate password. Contact the IMAC AeroJudge development team for the current password.
+       .. note:: When typing the password no characters will be displayed on the screen. If a mistake is made, press Enter and it will prompt again to enter the correct password.
 
-    |LoginImg3|
+     |LoginImg3|
 
-   #. Run update command: 
-   .. code-block:: bash
-      ./judge_update.sh
+  5. Run update command: 
+
+     .. code-block:: bash
+
+         ./judge_update.sh
 
 .. |LoginImg1| image:: images/adv001.png
     :align: middle
@@ -50,14 +52,12 @@ If you have an existing device that needs to be updated:
 
 * If the device is not connected to a WiFi network with internet, but you have the ability to obtain (or previously obtained) the latest judge application:
 
-  #. Use ..`WinSCP <https://winscp.net/>`_ (or similar FTP application) to transfer the new application file to the device |UpdateImg1|
+  #. Use `WinSCP <https://winscp.net/>`_ (or similar FTP application) to transfer the new application file to the device |UpdateImg1|
   #. Answer Yes if you receive a security alert (only the first time) |UpdateImg2|
   #. Navigate to the location with the updated application, click on the file and drag it to the device folder: |UpdateImg3|
   #. The file should now appear on the device: |UpdateImg4|
 
   #. Login to the device with Putty (or in WInSCP use menu :menuselection: `Commands --> Open Terminal` ) and run the following commands in order:
-
-        .. note:: No response will be seen after the commands are run
 
      .. code-block:: bash
 
@@ -66,6 +66,8 @@ If you have an existing device that needs to be updated:
         mv {filename you transferred} /var/opt/judge/bin/judge.jar
         sudo systemctl start kiosk.service
         sudo systemctl start judge.service
+
+    .. note:: No response will be seen after the commands are run
 
     |UpdateImg5|
 
@@ -88,11 +90,14 @@ Configuring device for a contest
 --------------------------------
 
 1. Insert SD card, opening the result drive, and find the file named settings.json. 
+
 2. Open this file in a standard text editor (not a rich editor like MS Word).
+
 3. Edit the file placing the appropriate values after the colon (:) being careful to preserve all formatting (braces, quotes, commas).
 
    .. code-block:: javascript
       :caption: settings.json
+
     {
         "judge_id":1,
         "line_number":1,
@@ -111,7 +116,8 @@ Configuring device for a contest
 
   **score_http_port** is the port number entered on the Score software services tab
 
-  **language** is the two letter language code (currently only en is supported)
+  **language** is the two letter language code (currently only "en" is supported)
 
 4. Be sure to eject the disk properly (right-click drive letter and choose Eject)
+
 5. Insert the SD card back into the device and power the device
