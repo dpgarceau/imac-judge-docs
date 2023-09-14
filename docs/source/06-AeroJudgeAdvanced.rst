@@ -24,10 +24,35 @@ First download an SSH client `Putty <https://www.chiark.greenend.org.uk/~sgtatha
 
 Archiving old comp data
 -----------------------
+#. Use `WinSCP <https://winscp.net/>`_ (or similar FTP application) to connect to the device |UpdateImg1|
+#. Answer Yes if you receive a security alert (only the first time) |UpdateImg2|
+#. On the right-hand side, Click the open directory button (`Control --> O`) and type /var/opt/judge and click OK |ArchiveImg1|
+#. Select to highlight the files comp.json, judge.log, pilots.dat, rounds.json, sequences.dat and the pilots folder |ArchiveImg2|
+#. Right click and choose `Static Custom Commands --> File Custom Commands --> Archive and Download...` |ArchiveImg3|
+#. Enter a name for the archive (suggest to use contest name and date), select archive type (suggest zip), and click OK |ArchiveImg4|
+#. New archive file will then appear on the computer folder on the left |ArchiveImg5|
+#. (Optional) To clear out that data, use the Delete option on the right-hand side (with the 5 files and 1 folder selected)
 
+.. |UpdateImg1| image:: images/devupd001.png
+    :align: middle
 
-Clearing old comp data
-----------------------
+.. |UpdateImg2| image:: images/devupd002.png
+    :align: middle
+
+.. |ArchiveImg1| image:: images/devarch001.png
+    :align: middle
+
+.. |ArchiveImg2| image:: images/devarch002.png
+    :align: middle
+
+.. |ArchiveImg3| image:: images/devarch003.png
+    :align: middle
+
+.. |ArchiveImg4| image:: images/devarch004.png
+    :align: middle
+
+.. |ArchiveImg5| image:: images/devarch005.png
+    :align: middle
 
 
 Stopping/Starting the app
