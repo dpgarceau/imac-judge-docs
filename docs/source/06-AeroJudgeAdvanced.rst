@@ -21,6 +21,40 @@ First download an SSH client `Putty <https://www.chiark.greenend.org.uk/~sgtatha
 
    .. note:: This is a Linux console and is very case sensitive (unlike Windows). Most all commands and parameters will be lowercase (unless otherwise noted). See [1]_
 
+.. |LoginImg1| image:: images/adv001.png
+    :align: middle
+
+.. |LoginImg2| image:: images/adv002.png
+    :align: middle
+
+.. |LoginImg3| image:: images/adv003.png
+    :align: middle
+
+
+Stopping/Starting the app
+-------------------------
+There are two processes running on the device to provide the functionality that makes up the AeroJudge application. Stopping both of these processes is necessary if you are upgrading the AeroJudge application.
+
+* To stop the application display (web browser) which will display the desktop, enter the following command and press enter:
+   .. code-block:: bash
+
+      sudo systemctl stop kiosk.service
+
+* To stop the application itself (what manages the scoring), enter the following command and press enter:
+   .. code-block:: bash
+
+      sudo systemctl stop kiosk.service
+
+* To start the application itself (what manages the scoring), enter the following command and press enter:
+   .. code-block:: bash
+
+      sudo systemctl start kiosk.service
+
+* To start the application display (web browser) which will display the desktop, enter the following command and press enter:
+   .. code-block:: bash
+
+      sudo systemctl start kiosk.service
+
 
 Archiving old comp data
 -----------------------
@@ -55,28 +89,6 @@ Archiving old comp data
     :align: middle
 
 
-Stopping/Starting the app
--------------------------
-There are two processes running on the device to provide the functionality that makes up the AeroJudge application. Stopping both of these processes is necessary if you are upgrading the AeroJudge application.
-
-* To stop the application display (web browser) which will display the desktop, enter the following command and press enter:
-   .. code-block:: bash
-
-      sudo systemctl stop kiosk.service
-
-* To stop the application itself (what manages the scoring), enter the following command and press enter:
-   .. code-block:: bash
-
-      sudo systemctl stop kiosk.service
-
-.. |LoginImg1| image:: images/adv001.png
-    :align: middle
-
-.. |LoginImg2| image:: images/adv002.png
-    :align: middle
-
-.. |LoginImg3| image:: images/adv003.png
-    :align: middle
 
 .. [1]
 
