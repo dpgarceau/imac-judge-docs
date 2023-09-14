@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroJudge Advanced Topics &mdash; IMAC Judge App Documentation 0.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="AeroJudge Users Guide" href="05-AeroJudgeUserGuide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IMAC Judge App Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-ScoreSetup.html">Score Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-AeroJudgeDeviceSetup.html">AeroJudge Device Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-AeroJudgeUserGuide.html">AeroJudge Users Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AeroJudge Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logging-into-a-device">Logging into a device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stopping-starting-the-app">Stopping/Starting the app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#archiving-old-comp-data">Archiving old comp data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-linux-command-primer">Quick Linux command primer</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IMAC Judge App Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AeroJudge Advanced Topics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/06-AeroJudgeAdvanced.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aerojudge-advanced-topics">
+<h1>AeroJudge Advanced Topics<a class="headerlink" href="#aerojudge-advanced-topics" title="Permalink to this heading"></a></h1>
+<section id="logging-into-a-device">
+<h2>Logging into a device<a class="headerlink" href="#logging-into-a-device" title="Permalink to this heading"></a></h2>
+<p>These steps are needed for any of the advanced topics below.
+First download an SSH client <a class="reference external" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a> or <a class="reference external" href="https://sysprogs.com/SmarTTY/">SmarTTY</a></p>
+<ol class="arabic">
+<li><p>Login to the device using Putty entering the appropriate IP address <img alt="LoginImg1" class="align-middle" src="_images/adv001.png" /></p></li>
+<li><p>Answer Yes if you receive a security alert (only the first time) <img alt="LoginImg2" class="align-middle" src="_images/adv002.png" /></p></li>
+<li><p>At login as prompt enter “judge” and press enter.</p></li>
+<li><dl>
+<dt>At the password prompt enter the approprate password. Contact the IMAC AeroJudge development team for the current password.</dt><dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When typing the password no characters will be displayed on the screen. If a mistake is made, press Enter and it will prompt again to enter the correct password.</p>
+</div>
+</dd>
+</dl>
+<p><img alt="LoginImg3" class="align-middle" src="_images/adv003.png" /></p>
+</li>
+<li><p>A command prompt will appear after entering the password: <img alt="LoginImg3" class="align-middle" src="_images/adv003.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a Linux console and is very case sensitive (unlike Windows). Most all commands and parameters will be lowercase (unless otherwise noted). See <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+</div>
+</li>
+</ol>
+</section>
+<section id="stopping-starting-the-app">
+<h2>Stopping/Starting the app<a class="headerlink" href="#stopping-starting-the-app" title="Permalink to this heading"></a></h2>
+<p>There are two processes running on the device to provide the functionality that makes up the AeroJudge application. Stopping both of these processes is necessary if you are upgrading the AeroJudge application.</p>
+<ul>
+<li><dl>
+<dt>To stop the application display (web browser) which will display the desktop, enter the following command and press enter:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>kiosk.service
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>To stop the application itself (what manages the scoring), enter the following command and press enter:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>kiosk.service
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>To start the application itself (what manages the scoring), enter the following command and press enter:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>kiosk.service
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>To start the application display (web browser) which will display the desktop, enter the following command and press enter:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>kiosk.service
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="archiving-old-comp-data">
+<h2>Archiving old comp data<a class="headerlink" href="#archiving-old-comp-data" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Use <a class="reference external" href="https://winscp.net/">WinSCP</a> (or similar FTP application) to connect to the device <img alt="UpdateImg1" class="align-middle" src="_images/devupd001.png" /></p></li>
+<li><p>Answer Yes if you receive a security alert (only the first time) <img alt="UpdateImg2" class="align-middle" src="_images/devupd002.png" /></p></li>
+<li><p>On the right-hand side, Click the open directory button (<cite>Control –&gt; O</cite>) and type /var/opt/judge and click OK <img alt="ArchiveImg1" class="align-middle" src="_images/devarch001.png" /></p></li>
+<li><p>Select to highlight the files comp.json, judge.log, pilots.dat, rounds.json, sequences.dat and the pilots folder <img alt="ArchiveImg2" class="align-middle" src="_images/devarch002.png" /></p></li>
+<li><p>Right click and choose <cite>Static Custom Commands –&gt; File Custom Commands –&gt; Archive and Download…</cite> <img alt="ArchiveImg3" class="align-middle" src="_images/devarch003.png" /></p></li>
+<li><p>Enter a name for the archive (suggest to use contest name and date), select archive type (suggest zip), and click OK <img alt="ArchiveImg4" class="align-middle" src="_images/devarch004.png" /></p></li>
+<li><p>New archive file will then appear on the computer folder on the left <img alt="ArchiveImg5" class="align-middle" src="_images/devarch005.png" /></p></li>
+<li><p>(Optional) To clear out that data, use the Delete option on the right-hand side (with the 5 files and 1 folder selected)</p></li>
+</ol>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+</aside>
+</aside>
+</section>
+<section id="quick-linux-command-primer">
+<h2>Quick Linux command primer<a class="headerlink" href="#quick-linux-command-primer" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p><strong>sudo</strong> is similar to an Administrative command prompt - it runs any command that follows with admin rights</p>
+<p><strong>systemctl</strong> is a background process manager much like Windows Services. It allows the following common actions: start, stop, restart, status</p>
+<p><strong>cp</strong> is the copy file command</p>
+<p><strong>mv</strong> is the move file command</p>
+<p><strong>judge.service</strong> is the background application that shows the pilots, collects scores, and sends scores to Score application</p>
+<p><strong>kiosk.service</strong> is the web browser running in “kiosk” mode which removes all toolbars, address bars, etc. to minimize risk of users unfamiliar with the app from closing it or navigating away from the application address.</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05-AeroJudgeUserGuide.html" class="btn btn-neutral float-left" title="AeroJudge Users Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, IMAC, https://mini-iac.org.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

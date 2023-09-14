@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development &mdash; IMAC Judge App Documentation 0.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Score Setup" href="03-ScoreSetup.html" />
+    <link rel="prev" title="Overview" href="01-overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IMAC Judge App Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#applicaton-flow-ideas">Applicaton Flow Ideas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-ScoreSetup.html">Score Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-AeroJudgeDeviceSetup.html">AeroJudge Device Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-AeroJudgeUserGuide.html">AeroJudge Users Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-AeroJudgeAdvanced.html">AeroJudge Advanced Topics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IMAC Judge App Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Development</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/02-development.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this heading"></a></h1>
+<p>Under this section the development aspects will be documented.
+Things like how to compile the code and design decisions etc.</p>
+<section id="applicaton-flow-ideas">
+<h2>Applicaton Flow Ideas<a class="headerlink" href="#applicaton-flow-ideas" title="Permalink to this heading"></a></h2>
+<p>Right now the application stores a “next round number” per pilot.   This schema will need to change because you can have different round numbers for different types of rounds.   It’s not such a problem for Knowns/Unknowns but for freestyle it will be an issue.</p>
+<p>For example, lest say you score 1 round of Sportsman, Intermediate and Advanced.   For pilots in these classes the ‘next round’ will be round 2.   You break for lunch and decide to run a freestyle round while people are eating.</p>
+<p>For those pilots in Unlimited flying Freestyle, this will be their ‘round 1’ but it’s ‘round 2’ for the others.
+After lunch you have more problems because now some sportsman pilots are up to ‘round 3’ and some are only at round 2 because they did not fly freestyle.  The solution is to maintain round numbers per class and per type (and freestyle separately as well).</p>
+<p>Currently, each time you choose a pilot you have to select the round type.
+So here is an opportunity for the judge to screw it up and cause lots of headaches for the CD.   If he accidentally chooses known instead of unknown he’s caused a problem.</p>
+<p>Here is my proposal on how the flow can happen that will hopefully solve problem 1 and minimize problem 2.</p>
+<p><strong>Scenario 1 - Filter pilots per round.</strong></p>
+<ul class="simple">
+<li><p>Only one round can be flown at a time (per flightline)</p></li>
+<li><p>Rounds are defined giving round numbers, sequence count and schedule. <a class="reference internal" href="_images/001.png"><img alt="roundImg1" class="align-middle" src="_images/001.png" style="width: 90%;" /></a></p></li>
+<li><p>Any of the rounds can be chosen as the ‘current round’ and you can stop and start rounds mid-stream buy simply selecting another round to fly.</p></li>
+<li><p>Rounds that are completed cannot be reflown. <a class="reference internal" href="_images/002.png"><img alt="roundImg2" class="align-middle" src="_images/002.png" style="width: 90%;" /></a></p></li>
+<li><p>Extra rounds can be added and it’s not a problem when rounds are not flown - it makes no different to the results.</p></li>
+</ul>
+<p>When a round is being flown, the pilots are filtered so you only see pilots participating in this round.   And the round number and sequence information is of course taken from the active round, not from the pilots record.</p>
+<p><strong>Scenario 2 - All pilots are available.</strong></p>
+<p>So how can we have this work for smaller comps where we just want everything to fly - as they do now?   I believe this can be achieved with a small change to the code.
+Rounds are still defined but when you choose a pilot, if he is the first pilot in this class to fly the current round, you then choose Known, Unknown or Freestyle.</p>
+<p>Selecting a round won’t be necessary and they pilots won’t be filtered.</p>
+<p>So when the application state shows that the current class does not have an active flight, and you choose a pilot from that class, then you are asked:
+* Is it a known or unknown?
+* What schedule is it?
+* Is it a single or a double?</p>
+<p>A new round is ‘defined’ and saved.   Since we are in ‘unfiltered’ mode, then there is no need to mark the round as active.   That is done automatically.</p>
+<p>The pilot flies, you score it, and you move on to the next pilot.   One of three things happens.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>You choose a pilot from the same class who has not flown this round.</strong></dt><dd><p>When this happens you are simply allowed to score the round as usual.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>You choose a pilot from the same class who has already flown this round.</strong></dt><dd><p>When this happens, you are shown that the scores exist and can choose another pilot.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>You choose a pilot from another class.</strong></dt><dd><p>If there is not a round active for this class, then you are prompted to choose one as described above.   If there is a round active, then you just score according to that round.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>In this scenario I’m not sure how we do freestyle.    I think the only solution there is to ignore it, but when a freestyle round should be scored, the CD will simply set the freestyle round to the the ‘active’ round and turn on ‘filtering mode’.
+Then for that round the judges will only see freestyle pilots and have the freestyle schedule.</p>
+<p>In both of these scenarios we are still relying on the judge to ‘pick the right round’.  Scenario one gives him the opportunity to pick a lot of things but it’s quite easy to go back and reselect a round when he realises his mistake.   If he has chosen known instead of unknown <em>and</em> the known is a single sequence round <em>and</em> he’s not looking at the figures or using the sound, then he might make it through to the end and cause a lot of headache for the CD, but it should be fixable.</p>
+<p>In the second scenario, it’s easy as well to select the wrong type (known or unknown) and so the same danger applies.</p>
+<p>One way to get around this is for the devices to communicate with each other.  I’ve thought about how to solve this with ScorePad in the past and have come up with the following idea:</p>
+<ul>
+<li><p>Judge selects the round and clicks OK.</p></li>
+<li><p>Device advertises on the local network.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="n">am</span> <span class="n">judge</span> <span class="n">X</span> <span class="n">of</span> <span class="n">Flight</span> <span class="n">Line</span> <span class="n">Y</span><span class="o">.</span>   <span class="n">I</span> <span class="n">am</span> <span class="n">scoring</span> <span class="n">Sportsman</span> <span class="n">Known</span> <span class="n">Round</span> <span class="mf">1.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Device does not start scoring until it hears from every other judge device.  It only needs to know how many devices there should be and that can be provided by Score.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01-overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03-ScoreSetup.html" class="btn btn-neutral float-right" title="Score Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, IMAC, https://mini-iac.org.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
